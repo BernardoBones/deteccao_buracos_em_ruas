@@ -1,0 +1,24 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+dist/
+build/
+.env
+venv/
+.venv/
+
+# Projeto
+models/*.pt
+models/*.onnx
+dataset/images/
+dataset/labels/
+dataset/*.zip
+dataset/*.yaml
+runs/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+.DS_Store
