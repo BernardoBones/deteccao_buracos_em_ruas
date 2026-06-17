@@ -1,0 +1,17 @@
+# Dataset: Potholes Detection YOLOv8
+# Fonte: https://www.kaggle.com/datasets/anggadwisunarto/potholes-detection-yolov8
+#
+# Estrutura esperada dentro de dataset/:
+#   train/images/  e  train/labels/
+#   valid/images/  e  valid/labels/
+#   test/images/   e  test/labels/
+
+path: dataset
+
+train: train/images
+val:   valid/images
+test:  test/images
+
+nc: 1
+names:
+  - pothole

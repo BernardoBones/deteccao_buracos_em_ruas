@@ -14,7 +14,7 @@ models/*.onnx
 dataset/images/
 dataset/labels/
 dataset/*.zip
-dataset/*.yaml
+dataset/*.cache
 runs/
 
 # IDE
