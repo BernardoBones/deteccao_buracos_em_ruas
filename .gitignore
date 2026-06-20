@@ -7,12 +7,18 @@ build/
 .env
 venv/
 .venv/
+*.mp4
+*.pt
+*.zip
 
 # Projeto
 models/*.pt
 models/*.onnx
 dataset/images/
 dataset/labels/
+dataset/train/
+dataset/valid/
+dataset/test/
 dataset/*.zip
 dataset/*.cache
 runs/

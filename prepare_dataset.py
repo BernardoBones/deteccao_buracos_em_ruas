@@ -210,7 +210,7 @@ def main():
 
     # --- extrai se for zip ---
     if source.suffix.lower() == ".zip":
-        extract_dir = Path("dataset_extracted")
+        extract_dir = Path("dataset")
         source = extract_zip(source, extract_dir)
 
     # --- encontra raiz com splits ---

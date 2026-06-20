@@ -59,9 +59,11 @@ def validate_dataset(data_yaml: Path) -> bool:
 
 
 def copy_best_model(run_name: str) -> Path | None:
-    best = Path(f"runs/train/{run_name}/weights/best.pt")
-    if not best.exists():
+    # rglob handles any project-prefix ultralytics may inject (e.g. runs/detect/...)
+    matches = sorted(Path("runs").rglob(f"{run_name}/weights/best.pt"))
+    if not matches:
         return None
+    best = matches[-1]  # most recent if somehow duplicated
     dest = Path("models/pothole_best.pt")
     dest.parent.mkdir(exist_ok=True)
     shutil.copy(best, dest)
@@ -95,7 +97,7 @@ def main():
         batch=args.batch,
         device=args.device,
         name=args.name,
-        project="runs/train",
+        project=str(Path("runs/train").resolve()),
         patience=15,        # early stopping após 15 épocas sem melhora
         save=True,
         save_period=10,     # salva checkpoint a cada 10 épocas

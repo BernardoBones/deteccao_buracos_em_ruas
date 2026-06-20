@@ -61,9 +61,6 @@ dataset/
 ├── valid/
 │   ├── images/
 │   └── labels/
-├── test/
-│   ├── images/
-│   └── labels/
 └── data.yaml
 ```
 
@@ -105,8 +102,8 @@ pothole-detector/
 
 ## Integrantes
 
-- [Nome 1]
-- [Nome 2]
+- Bernardo Baroni Bones - 19298
+- Pedro Antônio da Silva - 194828
 
 ## Professor
 
