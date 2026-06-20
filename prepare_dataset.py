@@ -20,6 +20,7 @@ from pathlib import Path
 
 DATASET_DIR = Path("dataset")
 SPLITS = ["train", "valid", "test"]
+OPTIONAL_SPLITS = {"test"}
 REQUIRED_SUBDIRS = ["images", "labels"]
 
 # Sufixos aceitos como imagem
@@ -89,7 +90,7 @@ def reorganize(source_root: Path) -> bool:
 # Verificação
 def verify() -> bool:
     print(f"\n{'='*55}")
-    print(f"  Verificação do Dataset")
+    print(f"   Verificação do Dataset")
     print(f"{'='*55}")
 
     all_ok = True
@@ -102,30 +103,36 @@ def verify() -> bool:
         n_imgs = _count(imgs_dir, IMAGE_EXTS) if imgs_dir.is_dir() else 0
         n_lbs = _count(lbs_dir, {".txt"}) if lbs_dir.is_dir() else 0
 
-        status = "[OK]  " if (n_imgs > 0 and n_imgs == n_lbs) else "[WARN]"
         if n_imgs == 0:
-            status = "[ERRO]"
-            all_ok = False
+            if split in OPTIONAL_SPLITS:
+                status = "[INFO]"
+                print(f"   {status} {split:<6}: {n_imgs:>5} imagens  |  {n_lbs:>5} labels (Split opcional ausente)")
+                continue
+            else:
+                status = "[ERRO]"
+                all_ok = False
+        else:
+            status = "[OK]  " if n_imgs == n_lbs else "[WARN]"
 
-        print(f"  {status} {split:<6}: {n_imgs:>5} imagens  |  {n_lbs:>5} labels", end="")
+        print(f"   {status} {split:<6}: {n_imgs:>5} imagens  |  {n_lbs:>5} labels", end="")
         if n_imgs != n_lbs:
-            print(f"  ← contagens diferentes!", end="")
+            print(f"   ← contagens diferentes!", end="")
             all_ok = False
         print()
 
     data_yaml = DATASET_DIR / "data.yaml"
     if data_yaml.exists():
-        print(f"\n  [OK]   data.yaml encontrado: {data_yaml}")
+        print(f"\n   [OK]   data.yaml encontrado: {data_yaml}")
     else:
-        print(f"\n  [ERRO] data.yaml não encontrado em {data_yaml}")
+        print(f"\n   [ERRO] data.yaml não encontrado em {data_yaml}")
         all_ok = False
 
     print(f"\n{'='*55}")
     if all_ok:
-        print("  Dataset pronto para treinamento.")
-        print("  Execute: python train.py --epochs 50 --batch 8")
+        print("   Dataset pronto para treinamento.")
+        print("   Execute: python train.py --epochs 50 --batch 8")
     else:
-        print("  Corrija os erros acima antes de treinar.")
+        print("   Corrija os erros acima antes de treinar.")
     print(f"{'='*55}\n")
 
     return all_ok
