@@ -314,7 +314,7 @@ class MainWindow(QMainWindow):
     @pyqtSlot(object, object, object)
     def _on_frame_ready(self, original, det_frame, detections):
         self._current_frame = original
-        annotated = self.detector.draw_detections(det_frame, detections)
+        annotated = self.detector.draw_detections(original, detections)
         annotated = self.processor.process_for_display(annotated, self.ctrl.get_active_filters())
         self._current_annotated = annotated
         self._display_frame(
@@ -341,7 +341,7 @@ class MainWindow(QMainWindow):
         self._current_frame = frame
         det_frame = self.processor.process_for_detection(frame, self.ctrl.get_active_filters())
         detections = self.detector.detect(det_frame)
-        annotated = self.detector.draw_detections(det_frame, detections)
+        annotated = self.detector.draw_detections(frame, detections)
         annotated = self.processor.process_for_display(annotated, self.ctrl.get_active_filters())
         self._current_annotated = annotated
         self._display_frame(annotated)
