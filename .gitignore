@@ -8,7 +8,6 @@ build/
 venv/
 .venv/
 *.mp4
-*.pt
 *.zip
 
 # Projeto

@@ -58,12 +58,12 @@ def validate_dataset(data_yaml: Path) -> bool:
     return True
 
 
-def copy_best_model(run_name: str) -> Path | None:
-    # rglob handles any project-prefix ultralytics may inject (e.g. runs/detect/...)
-    matches = sorted(Path("runs").rglob(f"{run_name}/weights/best.pt"))
-    if not matches:
+def copy_best_model(save_dir: Path) -> Path | None:
+    # ultralytics auto-increments the run dir (pothole_v1 -> pothole_v1-2 ...),
+    # so use the actual save_dir from the trainer instead of guessing by name.
+    best = Path(save_dir) / "weights" / "best.pt"
+    if not best.exists():
         return None
-    best = matches[-1]  # most recent if somehow duplicated
     dest = Path("models/pothole_best.pt")
     dest.parent.mkdir(exist_ok=True)
     shutil.copy(best, dest)
@@ -106,14 +106,15 @@ def main():
         val=True,
     )
 
-    dest = copy_best_model(args.name)
+    save_dir = model.trainer.save_dir
+    dest = copy_best_model(save_dir)
     if dest:
         print(f"\n[OK] Melhor modelo salvo em: {dest}")
         print(f"     Carregue-o na GUI com o botão 'Carregar Modelo'.")
     else:
         print("\n[AVISO] best.pt não encontrado. Verifique runs/train/")
 
-    print(f"\n[INFO] Resultados e gráficos em: runs/train/{args.name}/\n")
+    print(f"\n[INFO] Resultados e gráficos em: {save_dir}\n")
 
 
 if __name__ == "__main__":
