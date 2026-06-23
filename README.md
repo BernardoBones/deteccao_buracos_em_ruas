@@ -6,7 +6,7 @@ Desenvolvido como trabalho prático da disciplina **CCC309 – Processamento de 
 
 ## Demo
 
-> 🎬 [Link para o vídeo demonstrativo] *(em breve)*
+> (https://drive.google.com/drive/folders/1ImgzYjmPB0KxtHDnxikbiwliH9S7kwdz?usp=sharing)
 
 ## Funcionalidades
 
