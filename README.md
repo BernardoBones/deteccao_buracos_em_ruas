@@ -15,7 +15,7 @@ Desenvolvido como trabalho prático da disciplina **CCC309 – Processamento de 
 - Pipeline de pré-processamento com OpenCV:
   - Suavização Gaussiana (redução de ruído)
   - Realce de contraste adaptativo (CLAHE)
-  - Operações morfológicas (abertura)
+  - Operações morfológicas (fechamento)
   - Detecção de bordas (Canny)
   - Conversão para escala de cinza
 - Classificação de severidade: Severo / Moderado / Leve
@@ -33,8 +33,8 @@ Desenvolvido como trabalho prático da disciplina **CCC309 – Processamento de 
 
 ```bash
 # Clonar o repositório
-git clone <url-do-repositorio>
-cd pothole-detector
+git clone https://github.com/BernardoBones/deteccao_buracos_em_ruas
+cd deteccao_buracos_em_ruas
 
 # Criar ambiente virtual
 python -m venv venv
@@ -102,7 +102,7 @@ pothole-detector/
 
 ## Integrantes
 
-- Bernardo Baroni Bones - 19298
+- Bernardo Baroni Bones - 192298
 - Pedro Antônio da Silva - 194828
 
 ## Professor
